@@ -4,6 +4,7 @@ import React from "react";
 import ListItem from "../components/ListItem/ListItem";
 import Screen from "../components/Screen/Screen";
 import ListItemSeparator from "../components/ListItemSeparator/ListItemSeparator";
+import ListItemDeleteAction from "../components/ListItemDeleteAction/ListItemDeleteAction";
 
 const messages = [
   {
@@ -31,6 +32,8 @@ export default function MessageScreen() {
             title={item.title}
             subtitle={item.description}
             image={item.image}
+            onPress={() => console.log("Touched", item)}
+            renderRightActions={ListItemDeleteAction}
           />
         )}
         ItemSeparatorComponent={ListItemSeparator}
