@@ -7,6 +7,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 export default function AppFormPicker({
   items,
   PickerItemComponent,
+  numberOfColumns,
   width,
   name,
   placeholder,
@@ -16,6 +17,7 @@ export default function AppFormPicker({
   return (
     <React.Fragment>
       <AppPicker
+        numberOfColumns={numberOfColumns}
         items={items}
         name={name}
         PickerItemComponent={PickerItemComponent}
