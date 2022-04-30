@@ -1,8 +1,8 @@
-import { Text, StyleSheet, Platform } from "react-native";
+import { Text } from "react-native";
 import React from "react";
 
-import styles from "./styles";
+import defaultStyles from "../../config/styles";
 
 export default function AppText({ children, style }) {
-  return <Text style={[styles.text, style]}>{children}</Text>;
+  return <Text style={[defaultStyles.text, style]}>{children}</Text>;
 }
