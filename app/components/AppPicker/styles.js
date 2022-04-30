@@ -17,6 +17,9 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
   },
+  placeholder: {
+    color: colors.medium,
+  },
 });
 
 export default styles;
