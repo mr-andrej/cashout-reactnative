@@ -7,12 +7,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
     borderRadius: 25,
     flexDirection: "row",
-    width: "100%",
     padding: 15,
     marginVertical: 10,
   },
   icon: {
     marginRight: 10,
+  },
+  iconContainer: {
+    flex: 1,
+    alignItems: "flex-end",
+    justifyContent: "center",
+    alignContent: "center",
   },
   text: {
     flex: 1,

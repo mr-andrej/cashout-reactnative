@@ -7,6 +7,15 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: colors.white,
   },
+  icon: {
+    color: colors.medium,
+  },
+  iconContainer: {
+    flex: 1,
+    alignItems: "flex-end",
+    justifyContent: "center",
+    alignContent: "center",
+  },
   detailsContainer: {
     marginLeft: 10,
     justifyContent: "center",

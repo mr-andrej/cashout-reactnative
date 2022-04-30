@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: Constants.statusBarHeight,
   },
-  screenInterior: {
+  view: {
     flex: 1,
   },
 });

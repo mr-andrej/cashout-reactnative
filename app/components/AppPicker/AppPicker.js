@@ -18,15 +18,17 @@ export default function AppPicker({
   items,
   icon,
   onSelectItem,
+  PickerItemComponent = PickerItem,
   selectedItem,
   placeholder,
+  width = "100%",
 }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <React.Fragment>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -40,12 +42,13 @@ export default function AppPicker({
           ) : (
             <AppText style={styles.placeholder}>{placeholder}</AppText>
           )}
-
-          <MaterialCommunityIcons
-            name="chevron-down"
-            size={20}
-            color={defaultStyles.colors.medium}
-          />
+          <View style={styles.iconContainer}>
+            <MaterialCommunityIcons
+              name="chevron-down"
+              size={20}
+              color={defaultStyles.colors.medium}
+            />
+          </View>
         </View>
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="slide">
@@ -55,7 +58,7 @@ export default function AppPicker({
             data={items}
             keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (
-              <PickerItem
+              <PickerItemComponent
                 label={item.label}
                 onPress={() => {
                   setModalVisible(false);
