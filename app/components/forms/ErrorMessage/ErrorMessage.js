@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./styles";
-import AppText from "../AppText/AppText";
+import AppText from "../../AppText/AppText";
 
 export default function ErrorMessage({ error, visible }) {
   if (!visible || !error) {
