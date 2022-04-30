@@ -1,7 +1,7 @@
 import { View, Image, Text, TouchableHighlight } from "react-native";
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Swipeable } from "react-native-gesture-handler";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import styles from "./styles";
 import AppText from "../AppText/AppText";
@@ -12,21 +12,25 @@ export default function ListItem({
   title,
   subtitle,
   image,
+  IconComponent,
   onPress,
   renderRightActions,
-  isVerified,
+  isVerified = false, // Seems a bit odd, but it's how it'll remain for now
 }) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
         <View style={styles.container}>
-          <Image source={image} style={styles.image} />
-          <View>
+          {IconComponent}
+          {image && <Image source={image} style={styles.image} />}
+          <View style={styles.detailsContainer}>
             <AppText style={styles.title}>
-              {title}
-              <MaterialIcons name="verified" size={18} color="dodgerblue" />
+              {title}{" "}
+              {isVerified && (
+                <MaterialIcons name="verified" size={18} color="dodgerblue" />
+              )}
             </AppText>
-            <AppText style={styles.subtitle}>{subtitle}</AppText>
+            {subtitle && <AppText style={styles.subtitle}>{subtitle}</AppText>}
           </View>
         </View>
       </TouchableHighlight>

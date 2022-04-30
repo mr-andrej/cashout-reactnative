@@ -4,7 +4,10 @@ import Constants from "expo-constants";
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    paddingTop: Constants.StatusBarHeight,
+    paddingTop: Constants.statusBarHeight,
+  },
+  screenInterior: {
+    flex: 1,
   },
 });
 
