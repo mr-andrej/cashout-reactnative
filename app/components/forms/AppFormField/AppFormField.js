@@ -8,14 +8,14 @@ export default function AppFormField({ name, width, ...otherProps }) {
   const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
 
   return (
-    <React.Fragment>
+    <>
       <AppTextInput
         onBlur={() => setFieldTouched(name)}
         onChangeText={handleChange(name)}
         width={width}
         {...otherProps}
       />
-      <ErrorMessage visible={touched[name]} error={errors[name]} />
-    </React.Fragment>
+      <ErrorMessage error={errors[name]} visible={touched[name]} />
+    </>
   );
 }

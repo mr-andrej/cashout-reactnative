@@ -10,63 +10,70 @@ import {
 } from "../components/forms";
 import CategoryPickerItem from "../components/CategoryPickerItem/CategoryPickerItem";
 import Screen from "../components/Screen/Screen";
+import FormImagePicker from "../components/forms/FormImagePicker/FormImagePicker";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
   price: Yup.number().required().min(1).max(10000).label("Price"),
+  description: Yup.string().label("Description"),
   category: Yup.object().required().nullable().label("Category"),
-  description: Yup.string().min(16).label("Description"),
+  images: Yup.array().min(1, "Please select at least one image."),
 });
 
 const categories = [
-  { label: "Furniture", value: 1, backgroundColor: "red", icon: "floor-lamp" },
   {
-    label: "Clothing",
+    backgroundColor: "#fc5c65",
+    icon: "floor-lamp",
+    label: "Furniture",
+    value: 1,
+  },
+  {
+    backgroundColor: "#fd9644",
+    icon: "car",
+    label: "Cars",
     value: 2,
-    backgroundColor: "orange",
-    icon: "tshirt-crew",
   },
   {
-    label: "Electronics",
+    backgroundColor: "#fed330",
+    icon: "camera",
+    label: "Cameras",
     value: 3,
-    backgroundColor: "blue",
-    icon: "cellphone-link",
   },
   {
-    label: "Toys",
-    value: 4,
-    backgroundColor: "green",
-    icon: "gamepad-variant",
-  },
-  {
-    label: "Games",
-    value: 5,
-    backgroundColor: "purple",
+    backgroundColor: "#26de81",
     icon: "cards",
+    label: "Games",
+    value: 4,
   },
   {
+    backgroundColor: "#2bcbba",
+    icon: "shoe-heel",
+    label: "Clothing",
+    value: 5,
+  },
+  {
+    backgroundColor: "#45aaf2",
+    icon: "basketball",
     label: "Sports",
     value: 6,
-    backgroundColor: "pink",
-    icon: "bike",
   },
   {
-    label: "Books",
-    value: 7,
-    backgroundColor: "cyan",
-    icon: "book-open-page-variant",
-  },
-  {
+    backgroundColor: "#4b7bec",
+    icon: "headphones",
     label: "Movies & Music",
-    value: 8,
-    backgroundColor: "teal",
-    icon: "music-note",
+    value: 7,
   },
   {
+    backgroundColor: "#a55eea",
+    icon: "book-open-variant",
+    label: "Books",
+    value: 8,
+  },
+  {
+    backgroundColor: "#778ca3",
+    icon: "application",
     label: "Other",
     value: 9,
-    backgroundColor: "gray",
-    icon: "card-text-outline",
   },
 ];
 
@@ -77,33 +84,35 @@ export default function ListingEditScreen() {
         initialValues={{
           title: "",
           price: "",
-          category: null,
           description: "",
+          category: null,
+          images: [],
         }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
+        <FormImagePicker name="images" />
         <FormField maxLength={255} name="title" placeholder="Title" />
         <FormField
           keyboardType="numeric"
+          maxLength={8}
           name="price"
           placeholder="Price"
-          maxLength={8} // max price is $10000.00 - 8 digits
-          width={100}
+          width={120}
         />
         <Picker
-          numberOfColumns={3}
-          name="category"
-          placeholder="Category"
-          PickerItemComponent={CategoryPickerItem}
           items={categories}
-          width="80%"
+          name="category"
+          numberOfColumns={3}
+          PickerItemComponent={CategoryPickerItem}
+          placeholder="Category"
+          width="50%"
         />
         <FormField
           maxLength={255}
           multiline
-          numberOfLines={3} // Only works on Android
           name="description"
+          numberOfLines={3}
           placeholder="Description"
         />
         <SubmitButton title="Post" />
