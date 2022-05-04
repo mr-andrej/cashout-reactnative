@@ -12,6 +12,11 @@ export default function useLocation() {
         throw new Error("Location permission not granted. Aborting.");
 
       let location = await Location.getLastKnownPositionAsync();
+
+      if (location == null) {
+        // If no last known location, check for the current location
+        location = await Location.getCurrentPositionAsync();
+      }
       const { latitude, longitude } = location.coords;
 
       setLocation({ latitude, longitude });
