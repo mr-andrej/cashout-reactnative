@@ -8,16 +8,17 @@ export default function useLocation() {
     try {
       const { granted } = await Location.requestForegroundPermissionsAsync();
 
-      if (!granted) return;
+      if (!granted)
+        throw new Error("Location permission not granted. Aborting.");
 
-      const {
-        coords: { latitude, longitude },
-      } = await Location.getLastKnownPositionAsync();
+      let location = await Location.getLastKnownPositionAsync();
+      const { latitude, longitude } = location.coords;
+
       setLocation({ latitude, longitude });
 
-      return coords;
+      return { latitude, longitude };
     } catch (e) {
-      console.log("Something went wrong. Failed to get location. " + e);
+      console.log("Failed to get position. (", e, ")");
     }
   };
 
