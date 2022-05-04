@@ -2,8 +2,9 @@ import { StyleSheet, Text, Image, View, ImageBackground } from "react-native";
 import React from "react";
 
 import AppButton from "../components/AppButton/AppButton";
+import routes from "../navigation/routes";
 
-export default function LandingScreen() {
+export default function LandingScreen({ navigation }) {
   return (
     <ImageBackground
       blurRadius={10}
@@ -18,13 +19,13 @@ export default function LandingScreen() {
         <AppButton
           color="primary"
           title="login"
-          onPress={() => alert("tapped")}
+          onPress={() => navigation.navigate(routes.LOGIN)}
         />
 
         <AppButton
           color="secondary"
           title="register"
-          onPress={() => alert("tapped")}
+          onPress={() => navigation.navigate(routes.REGISTER)}
         />
       </View>
     </ImageBackground>
