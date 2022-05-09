@@ -4,7 +4,7 @@ import colors from "../../config/colors";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.light,
+    backgroundColor: colors.mediumlight,
     borderRadius: 25,
     flexDirection: "row",
     padding: 15,

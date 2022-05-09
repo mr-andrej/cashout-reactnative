@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, View } from "react-native";
+import { FlatList } from "react-native";
 import React, { useState } from "react";
 
 import ListItem from "../components/ListItem/ListItem";
@@ -9,14 +9,14 @@ import ListItemDeleteAction from "../components/ListItemDeleteAction/ListItemDel
 const initialMessages = [
   {
     id: 1,
-    title: "T1",
-    description: "D1",
+    title: "Johnny Smith",
+    description: "Hey, I love the red jacket y...",
     image: require("../assets/avatar.jpg"),
   },
   {
     id: 2,
-    title: "T2",
-    description: "D2",
+    title: "Terry Williams",
+    description: "Hello hello, is that couch s...",
     image: require("../assets/avatar.jpg"),
   },
 ];
@@ -50,9 +50,15 @@ export default function MessageScreen() {
         onRefresh={() => {
           setMessages([
             {
+              id: 1,
+              title: "Johnny Smith",
+              description: "Hey, I love the red jacket y...",
+              image: require("../assets/avatar.jpg"),
+            },
+            {
               id: 2,
-              title: "T2",
-              description: "D2",
+              title: "Terry Williams",
+              description: "Hello hello, is that couch s...",
               image: require("../assets/avatar.jpg"),
             },
           ]);

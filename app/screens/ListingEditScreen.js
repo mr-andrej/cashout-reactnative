@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
+import * as Notifications from "expo-notifications";
 
 import {
   AppForm as Form,
@@ -12,6 +13,9 @@ import CategoryPickerItem from "../components/CategoryPickerItem/CategoryPickerI
 import Screen from "../components/Screen/Screen";
 import FormImagePicker from "../components/forms/FormImagePicker/FormImagePicker";
 import useLocation from "../hooks/useLocation";
+import listingsApi from "../api/listings";
+import UploadScreen from "./UploadScreen";
+import colors from "../config/colors";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -79,10 +83,42 @@ const categories = [
 ];
 
 export default function ListingEditScreen() {
-  const location = useLocation(); // Throws ReferenceError upon rendering until you fill out and submit the form
+  const location = useLocation();
+  const [uploadScreen, setUploadScreen] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const handleSubmit = async (listing, { resetForm }) => {
+    setProgress(0);
+    setUploadScreen(true);
+    const result = await listingsApi.addListing(
+      { ...listing, location },
+      (progress) => setProgress(progress)
+    );
+
+    if (!result.ok) {
+      setUploadScreen(false);
+      return alert("Could not create the listing.");
+    }
+
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Looks great!",
+        body: "Your article was just listed.",
+        sound: "default",
+      },
+      trigger: null,
+    });
+
+    resetForm();
+  };
 
   return (
     <Screen style={styles.container}>
+      <UploadScreen
+        onDone={() => setUploadScreen(false)}
+        progress={progress}
+        visible={uploadScreen}
+      />
       <Form
         initialValues={{
           title: "",
@@ -91,7 +127,7 @@ export default function ListingEditScreen() {
           category: null,
           images: [],
         }}
-        onSubmit={(values) => console.log(location)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <FormImagePicker name="images" />
@@ -127,5 +163,6 @@ export default function ListingEditScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    backgroundColor: colors.light,
   },
 });

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import React from "react";
 
 import Screen from "../components/Screen/Screen";
@@ -6,6 +6,7 @@ import ListItem from "../components/ListItem/ListItem";
 import colors from "../config/colors";
 import Icon from "../components/Icon/Icon";
 import ListItemSeparator from "../components/ListItemSeparator/ListItemSeparator";
+import useAuth from "../auth/useAuth";
 
 const menuItems = [
   {
@@ -26,12 +27,14 @@ const menuItems = [
 ];
 
 export default function AccountScreen({ navigation }) {
+  const { user, logOut } = useAuth();
+
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          title="Johnny Depp"
-          subtitle="johnny@depp.com"
+          title={user.name}
+          subtitle={user.email}
           image={require("../assets/avatar.jpg")}
           isVerified={true}
         />
@@ -56,8 +59,9 @@ export default function AccountScreen({ navigation }) {
         />
       </View>
       <ListItem
+        onPress={logOut}
         title="Log out"
-        IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
+        IconComponent={<Icon name="logout" backgroundColor="#189AB4" />}
       />
     </Screen>
   );

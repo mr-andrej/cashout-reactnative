@@ -33,7 +33,7 @@ export default function ListItem({
                 )}
               </AppText>
               {subtitle && (
-                <AppText numberofLines={2} style={styles.subtitle}>
+                <AppText numberofLines={1} style={styles.subtitle}>
                   {subtitle}
                 </AppText>
               )}

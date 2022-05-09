@@ -5,6 +5,9 @@ const styles = StyleSheet.create({
   error: {
     color: colors.danger,
   },
+  lightError: {
+    color: colors.lightfont,
+  },
 });
 
 export default styles;

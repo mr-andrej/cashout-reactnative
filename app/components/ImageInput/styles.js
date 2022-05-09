@@ -4,7 +4,7 @@ import colors from "../../config/colors";
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: colors.light,
+    backgroundColor: colors.mediumlight,
     borderRadius: 15,
     height: 100,
     justifyContent: "center",
