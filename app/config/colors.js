@@ -1,7 +1,15 @@
 export default {
-  primary: "#fc5c65",
-  secondary: "#4ecdc4",
+  primary: "#05445E",
+  secondary: "#75E6DA",
+  tertiary: "#189AB4",
+  darkfont: "#05445E",
+  lightfont: "#F5F5F5",
   black: "#000",
   white: "#fff",
+  dark: "#0c0c0c",
   medium: "#6e6969",
+  mediumlight: "#e6e6e6",
+  light: "#f4f4f4",
+  danger: "#ff5252",
+  offWhite: "#FAF9F6",
 };

@@ -1,20 +1,53 @@
-import { View, Image, Text } from "react-native";
+import { View, Image, TouchableHighlight } from "react-native";
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import styles from "./styles";
 import AppText from "../AppText/AppText";
+import colors from "../../config/colors";
 
-export default function ListItem({ title, subtitle, image }) {
+// TODO: Implement isVerified prop in ListItem component and use it to show a verified badge
+export default function ListItem({
+  title,
+  subtitle,
+  image,
+  IconComponent,
+  onPress,
+  renderRightActions,
+  isVerified = false, // Seems a bit odd, but it's how it'll remain for now
+  showChevron = true,
+}) {
   return (
-    <View style={styles.container}>
-      <Image source={image} style={styles.image} />
-      <View>
-        <AppText style={styles.title}>
-          {title} <MaterialIcons name="verified" size={18} color="dodgerblue" />
-        </AppText>
-        <AppText style={styles.subtitle}>{subtitle}</AppText>
-      </View>
-    </View>
+    <Swipeable renderRightActions={renderRightActions}>
+      <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
+        <React.Fragment>
+          <View style={styles.container}>
+            {IconComponent}
+            {image && <Image source={image} style={styles.image} />}
+            <View style={styles.detailsContainer}>
+              <AppText numberofLines={1} style={styles.title}>
+                {title}{" "}
+                {isVerified && (
+                  <MaterialIcons name="verified" size={18} color="dodgerblue" />
+                )}
+              </AppText>
+              {subtitle && (
+                <AppText numberofLines={1} style={styles.subtitle}>
+                  {subtitle}
+                </AppText>
+              )}
+            </View>
+            <View style={styles.iconContainer}>
+              <MaterialIcons
+                name="chevron-right"
+                size={25}
+                style={styles.icon}
+              />
+            </View>
+          </View>
+        </React.Fragment>
+      </TouchableHighlight>
+    </Swipeable>
   );
 }

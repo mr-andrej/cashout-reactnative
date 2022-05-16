@@ -7,8 +7,8 @@
     "icon": "./app/assets/icon.png",
     "splash": {
       "image": "./app/assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#189AB4"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -29,6 +29,9 @@
       "favicon": "./app/assets/favicon.png"
     },
     "description": "",
+    "notification": {
+      "iosDisplayInForeground": true
+    },
     "githubUrl": "https://github.com/mr-andrej/cashout-reactnative"
   }
 }

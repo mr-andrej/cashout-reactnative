@@ -1,20 +1,30 @@
-import { StyleSheet, Text, Image, View } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, View, Platform } from "react-native";
 import React from "react";
+import { Image } from "react-native-expo-image-cache";
 
 import ListItem from "../components/ListItem/ListItem";
 import AppText from "../components/AppText/AppText";
 import colors from "../config/colors";
+import ContactSellerForm from "../components/ContactSellerForm/ContactSellerForm";
 
-export default function ListingDetailsScreen() {
+export default function ListingDetailsScreen({ route }) {
+  const listing = route.params;
+
   return (
-    <View>
+    <KeyboardAvoidingView
+      behavior="position"
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 100}
+    >
       <Image
         style={styles.image}
-        source={require("../assets/orange-tree.jpeg")}
+        preview={{ uri: listing.images[0].thumbnailUrl }}
+        tint="light"
+        uri={listing.images[0].url}
       />
+
       <View style={styles.detailsContainer}>
-        <AppText style={styles.title}>Orange tree for sale</AppText>
-        <AppText style={styles.price}>120$</AppText>
+        <AppText style={styles.title}>{listing.title}</AppText>
+        <AppText style={styles.price}>${listing.price}</AppText>
         <View style={styles.userContainer}>
           <ListItem
             image={require("../assets/avatar.jpg")}
@@ -22,8 +32,9 @@ export default function ListingDetailsScreen() {
             subtitle="12 listings"
           ></ListItem>
         </View>
+        <ContactSellerForm listing={listing} />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

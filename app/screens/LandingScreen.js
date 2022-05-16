@@ -1,33 +1,40 @@
-import { StyleSheet, Text, Image, View, ImageBackground } from "react-native";
+import { StyleSheet, Text, Image, View } from "react-native";
+import LottieView from "lottie-react-native";
 import React from "react";
 
 import AppButton from "../components/AppButton/AppButton";
+import routes from "../navigation/routes";
+import colors from "../config/colors";
 
-export default function LandingScreen() {
+export default function LandingScreen({ navigation }) {
   return (
-    <ImageBackground
-      blurRadius={10}
-      style={styles.background}
-      source={require("../assets/background.jpg")}
-    >
+    <>
+      <LottieView
+        loop
+        autoPlay
+        source={require("../assets/animations/landing.json")}
+      />
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={require("../assets/logo-red.png")} />
-        <Text style={styles.tagline}>Why throw out when you can CashOut?</Text>
+        <Image
+          style={styles.logo}
+          source={require("../assets/text-logo.png")}
+        />
+        <Text style={styles.tagline}>alpha v0.1.4</Text>
       </View>
       <View style={styles.buttonsContainer}>
         <AppButton
-          color="primary"
+          color="tertiary"
           title="login"
-          onPress={() => alert("tapped")}
+          onPress={() => navigation.navigate(routes.LOGIN)}
         />
 
         <AppButton
           color="secondary"
           title="register"
-          onPress={() => alert("tapped")}
+          onPress={() => navigation.navigate(routes.REGISTER)}
         />
       </View>
-    </ImageBackground>
+    </>
   );
 }
 
@@ -39,22 +46,30 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     padding: 20,
+    marginBottom: 50,
     width: "100%",
+    position: "absolute",
+    zIndex: 1,
+    bottom: 0,
   },
   logo: {
-    width: 100,
-    height: 100,
-  },
-  logoContainer: {
-    position: "absolute",
-    alignItems: "center",
-    top: 70,
+    width: 166,
+    height: 44,
+    zIndex: 1,
+    top: 120,
   },
   tagline: {
-    fontSize: 25,
-    fontWeight: "600",
-    paddingVertical: 20,
-    width: "80%",
-    textAlign: "center",
+    fontSize: 15,
+    top: 130,
+    fontWeight: "500",
+    color: colors.lightfont,
+  },
+  logoContainer: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
